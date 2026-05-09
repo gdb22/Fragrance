@@ -1,0 +1,47 @@
+{% extends "hello/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<section class="content-page">
+	<!-- Intro hero with headline and featured image -->
+	<section class="page-hero page-hero--split">
+		<div class="page-hero-copy">
+			<p class="page-eyebrow">Welcome</p>
+			<h1 class="page-title">Fragrance and Beyond</h1>
+			<p class="page-intro">
+				Discover curated scent inspiration, compare standout fragrance profiles, and explore picks designed to match your style.
+			</p>
+		</div>
+
+		<div class="hero-visual-card">
+			<img src="{% static 'hello/images/fragrance.png' %}" alt="Fragrance collection" class="hero-image">
+		</div>
+	</section>
+
+	<!-- Summary cards highlighting the site's value -->
+	<section class="info-grid">
+		<article class="info-card">
+			<p class="info-card-label">Curated Picks</p>
+			<h2>Thoughtful fragrance selection</h2>
+			<p>Each product highlight focuses on scent family, key notes, and styling so you can compare options quickly.</p>
+		</article>
+
+		<article class="info-card">
+			<p class="info-card-label">Easy Browsing</p>
+			<h2>Explore with confidence</h2>
+			<p>Browse the product collection by category and compare each fragrance in a clean, easy-to-read layout.</p>
+		</article>
+
+		<article class="info-card">
+			<p class="info-card-label">Personal Taste</p>
+			<h2>Find your signature scent</h2>
+			<p>Whether you prefer fresh, woody, floral, or sweet profiles, the collection helps you compare styles at a glance.</p>
+		</article>
+	</section>
+</section>
+{% endblock %}

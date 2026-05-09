@@ -1,0 +1,92 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div class="report-page">
+	<h1>{{ title }}</h1>
+
+	<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:20px 0;">
+		<a class="button" href="{{ report_links.products }}">Manage products</a>
+		<a class="button" href="{{ report_links.reviews }}">Manage reviews</a>
+		<a class="button" href="{{ report_links.users }}">Manage users</a>
+		<a class="button" href="{{ report_links.groups }}">Manage groups</a>
+	</div>
+
+	<h2>Overview</h2>
+	<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px;">
+		<div class="module"><div style="padding:16px;"><strong>Products</strong><p style="margin:8px 0 0;">{{ stats.product_count }} total · {{ stats.active_product_count }} active</p></div></div>
+		<div class="module"><div style="padding:16px;"><strong>Reviews</strong><p style="margin:8px 0 0;">{{ stats.review_count }} total · Avg {{ stats.average_rating|default:"0"|floatformat:1 }}/5</p></div></div>
+		<div class="module"><div style="padding:16px;"><strong>Users</strong><p style="margin:8px 0 0;">{{ stats.user_count }} users · {{ stats.staff_count }} staff</p></div></div>
+		<div class="module"><div style="padding:16px;"><strong>Groups</strong><p style="margin:8px 0 0;">{{ stats.group_count }} groups · {{ stats.users_without_groups }} without group</p></div></div>
+	</div>
+
+	<h2>Security & access</h2>
+	<div class="module" style="margin-bottom:24px;">
+		<table>
+			<tbody>
+				<tr><th>Active users</th><td>{{ security_snapshot.active_users }}</td></tr>
+				<tr><th>Inactive users</th><td>{{ security_snapshot.inactive_users }}</td></tr>
+				<tr><th>Staff users</th><td>{{ security_snapshot.staff_users }}</td></tr>
+				<tr><th>Superusers</th><td>{{ stats.superuser_count }}</td></tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+		<div class="module">
+			<h2>Recent products</h2>
+			<table>
+				<thead><tr><th>Product</th><th>Category</th><th>Price</th></tr></thead>
+				<tbody>
+					{% for product in recent_products %}
+					<tr><td>{{ product.brand }}</td><td>{{ product.get_category_display }}</td><td>${{ product.price|floatformat:"-2" }}</td></tr>
+					{% empty %}
+					<tr><td colspan="3">No products yet.</td></tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="module">
+			<h2>Recent reviews</h2>
+			<table>
+				<thead><tr><th>Fragrance</th><th>Reviewer</th><th>Rating</th></tr></thead>
+				<tbody>
+					{% for review in recent_reviews %}
+					<tr><td>{{ review.fragrance_name }}</td><td>{{ review.reviewer_name }}</td><td>{{ review.rating }}/5</td></tr>
+					{% empty %}
+					<tr><td colspan="3">No reviews yet.</td></tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="module">
+			<h2>Recent users</h2>
+			<table>
+				<thead><tr><th>Username</th><th>Email</th><th>Joined</th></tr></thead>
+				<tbody>
+					{% for user in recent_users %}
+					<tr><td>{{ user.get_username }}</td><td>{{ user.email|default:"—" }}</td><td>{{ user.date_joined|date:"M j, Y" }}</td></tr>
+					{% empty %}
+					<tr><td colspan="3">No users found.</td></tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="module">
+			<h2>User groups</h2>
+			<table>
+				<thead><tr><th>Group</th><th>Members</th></tr></thead>
+				<tbody>
+					{% for group in security_groups %}
+					<tr><td>{{ group.name }}</td><td>{{ group.member_count }}</td></tr>
+					{% empty %}
+					<tr><td colspan="2">No groups configured.</td></tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock %}

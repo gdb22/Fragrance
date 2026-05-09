@@ -1,0 +1,116 @@
+{% extends "hello/layout.html" %}
+{% load static %}
+
+{% block title %}
+Product
+{% endblock %}
+
+{% block content %}
+<section class="product-page">
+	<!-- Product page hero and catalog introduction -->
+	<header class="product-hero">
+		<p class="product-eyebrow">Fragrance Collection</p>
+		<h1 class="product-page-title">Find your signature scent</h1>
+		<p class="product-page-intro">
+			Explore standout fragrances for men and women, presented in a simple catalog layout with key notes and pricing.
+		</p>
+	</header>
+
+	<!-- Side-by-side fragrance collections -->
+	<div class="product-columns">
+		<!-- Men's fragrance collection -->
+		<section class="category-column">
+			<div class="collection-banner collection-banner--men">Men's Collection</div>
+
+			<div class="category-header">
+				<div>
+					<p class="category-label">For Him</p>
+					<h2 class="category-title">Men</h2>
+					<p class="category-description">Fresh, woody, aromatic, and bold profiles selected for everyday wear and statement moments.</p>
+				</div>
+				<span class="category-count">{{ men_products|length }} scents</span>
+			</div>
+
+			<div class="product-board">
+				{% for product in men_products %}
+				<article class="product-card">
+					<!-- Product image or fallback badge -->
+					<div class="product-visual" aria-label="{{ product.brand }} image">
+						{% if product.image_file %}
+						<img src="{{ product.image_file.url }}" alt="{{ product.brand }} bottle" class="product-image">
+						{% elif product.image %}
+						<img src="{% static product.image %}" alt="{{ product.brand }} bottle" class="product-image">
+						{% else %}
+						<div class="product-badge">{{ product.badge }}</div>
+						{% endif %}
+					</div>
+
+					<div class="product-copy">
+						<div class="product-name-box">
+							<h3>{{ product.brand }}</h3>
+							<p class="product-meta">{{ product.size }} · ${{ product.price|floatformat:"-2" }}</p>
+						</div>
+
+						<div class="product-notes-box">
+						<h4>{{ product.notes_title }}</h4>
+						<ul>
+							{% for note in product.notes %}
+							<li>{{ note }}</li>
+							{% endfor %}
+						</ul>
+						</div>
+					</div>
+				</article>
+				{% endfor %}
+			</div>
+		</section>
+
+		<!-- Women's fragrance collection -->
+		<section class="category-column category-column--women">
+			<div class="collection-banner collection-banner--women">Women's Collection</div>
+
+			<div class="category-header">
+				<div>
+					<p class="category-label">For Her</p>
+					<h2 class="category-title">Women</h2>
+					<p class="category-description">Soft, floral, sweet, and elegant fragrances arranged separately for a clearer comparison.</p>
+				</div>
+				<span class="category-count">{{ women_products|length }} scents</span>
+			</div>
+
+			<div class="product-board">
+				{% for product in women_products %}
+				<article class="product-card">
+					<!-- Product image or fallback badge -->
+					<div class="product-visual soft-tone" aria-label="{{ product.brand }} image">
+						{% if product.image_file %}
+						<img src="{{ product.image_file.url }}" alt="{{ product.brand }} bottle" class="product-image">
+						{% elif product.image %}
+						<img src="{% static product.image %}" alt="{{ product.brand }} bottle" class="product-image">
+						{% else %}
+						<div class="product-badge">{{ product.badge }}</div>
+						{% endif %}
+					</div>
+
+					<div class="product-copy">
+						<div class="product-name-box product-name-box--inline">
+							<h3>{{ product.brand }}</h3>
+							<p class="product-meta">{{ product.size }} · ${{ product.price|floatformat:"-2" }}</p>
+						</div>
+
+						<div class="product-notes-box product-notes-box--plain">
+							<h4>{{ product.notes_title }}</h4>
+							<ul>
+								{% for note in product.notes %}
+								<li>{{ note }}</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</article>
+				{% endfor %}
+			</div>
+		</section>
+	</div>
+</section>
+{% endblock %}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<!-- Shared page metadata and stylesheet -->
+<meta charset="utf-8"/>
+
+<title>{% block title %}{% endblock %}</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'hello/style.css' %}"/>
+
+</head>
+
+<body>
+
+{% with current_url=request.resolver_match.url_name %}
+
+<!-- Main site navigation -->
+<header class="site-header">
+    <nav class="navbar">
+        <div class="navbar-links">
+            <a href="{% url 'home' %}" class="navbar-item{% if current_url == 'home' %} navbar-item--active{% endif %}">Home</a>
+            <a href="{% url 'about' %}" class="navbar-item{% if current_url == 'about' %} navbar-item--active{% endif %}">About</a>
+            <a href="{% url 'contact' %}" class="navbar-item{% if current_url == 'contact' %} navbar-item--active{% endif %}">Contact</a>
+            <a href="{% url 'product' %}" class="navbar-item{% if current_url == 'product' %} navbar-item--active{% endif %}">Products</a>
+            <a href="{% url 'review' %}" class="navbar-item{% if current_url == 'review' %} navbar-item--active{% endif %}">Reviews</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Page-specific content block -->
+<main class="page-shell">
+    <div class="body-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</main>
+
+<!-- Shared footer content -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <p class="site-footer-title">Fragrance Collection</p>
+        <p class="site-footer-copy">Curated scent picks designed to help you compare notes, style, and signature appeal.</p>
+        <p class="site-footer-meta">&copy; 2026 Fragrance</p>
+    </div>
+</footer>
+
+{% endwith %}
+
+</body>
+</html>

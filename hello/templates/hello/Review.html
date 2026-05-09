@@ -1,0 +1,160 @@
+{% extends "hello/layout.html" %}
+
+{% block title %}
+Reviews
+{% endblock %}
+
+{% block content %}
+<section class="content-page review-page review-page--simple">
+	<header class="review-simple-header">
+		<p class="page-eyebrow">Reviews</p>
+		<h1 class="page-title">Share your fragrance review</h1>
+		<p class="page-intro">Leave a quick review and browse what others have shared.</p>
+	</header>
+
+	{% if messages %}
+	<section class="review-flash-stack">
+		{% for message in messages %}
+		<div class="review-flash review-flash--{{ message.tags|default:'info' }}"{% if 'success' in message.tags %} data-review-success-message="true"{% endif %}>{{ message }}</div>
+		{% endfor %}
+	</section>
+	{% endif %}
+
+	<section class="review-layout">
+		<article class="review-form-card" id="review-form">
+			<div class="review-section-heading">
+				<h2>Leave a review</h2>
+				<p class="review-section-copy">Keep it short, clear, and helpful.</p>
+			</div>
+
+			<form method="post" class="review-form">
+				{% csrf_token %}
+
+				{% if form.non_field_errors %}
+				<div class="review-error-box">{{ form.non_field_errors }}</div>
+				{% endif %}
+
+				<div class="review-form-grid">
+					<div class="review-field">
+						<label for="{{ form.reviewer_name.id_for_label }}" class="review-field-label">{{ form.reviewer_name.label }}</label>
+						<div class="review-input-shell">
+							{{ form.reviewer_name }}
+						</div>
+						{{ form.reviewer_name.errors }}
+					</div>
+
+					<div class="review-field">
+						<label for="{{ form.product.id_for_label }}" class="review-field-label">{{ form.product.label }}</label>
+						<div class="review-input-shell">
+							{{ form.product }}
+						</div>
+						{{ form.product.errors }}
+					</div>
+
+					<div class="review-field review-field--full">
+						<label for="{{ form.title.id_for_label }}" class="review-field-label">{{ form.title.label }}</label>
+						<div class="review-input-shell">
+							{{ form.title }}
+						</div>
+						{{ form.title.errors }}
+					</div>
+
+					<div class="review-field review-field--compact">
+						<div class="review-rating-header">
+							<label for="{{ form.rating.id_for_label }}" class="review-field-label">{{ form.rating.label }}</label>
+							<p class="review-field-hint">Choose the overall impression this fragrance left on you.</p>
+						</div>
+						<div class="review-rating-shell">
+							<div class="review-star-rating" role="radiogroup" aria-label="Choose a rating from 1 to 5 stars">
+							{% with selected_rating=form.rating.value|stringformat:"s" %}
+								{% for value in "54321" %}
+								<label class="review-star-option" for="id_rating_{{ forloop.counter0 }}" title="{{ value }} out of 5">
+									<input
+										type="radio"
+										name="rating"
+										id="id_rating_{{ forloop.counter0 }}"
+										value="{{ value }}"
+										{% if selected_rating == value %}checked{% endif %}
+									>
+									<span aria-hidden="true">★</span>
+								</label>
+								{% endfor %}
+							{% endwith %}
+							</div>
+							<p class="review-star-caption">Tap a star to rate from 1 to 5.</p>
+						</div>
+						{{ form.rating.errors }}
+					</div>
+
+					<div class="review-field review-field--full">
+						<label for="{{ form.review_text.id_for_label }}" class="review-field-label">{{ form.review_text.label }}</label>
+						<div class="review-input-shell review-input-shell--textarea review-input-shell--plain-textarea">
+							{{ form.review_text }}
+						</div>
+						{{ form.review_text.errors }}
+					</div>
+				</div>
+
+				<div class="review-form-footer">
+					<p class="review-form-note">Keep it kind, specific, and useful for the next fragrance lover.</p>
+					<button type="submit" class="btn review-submit">Submit review</button>
+				</div>
+			</form>
+		</article>
+
+		<section class="review-feed-card">
+			<div class="review-section-heading">
+				<h2>Recent reviews</h2>
+				<p class="review-section-copy">Newest reviews appear first.</p>
+			</div>
+
+			{% if reviews %}
+			<div class="review-feed">
+				{% for review in reviews %}
+				<article class="review-entry{% if review.id == highlighted_review_id %} review-entry--new{% endif %}"{% if review.id == highlighted_review_id %} data-review-new-card="true"{% endif %}>
+					{% if review.id == highlighted_review_id %}
+					<p class="review-entry-badge">Just added</p>
+					{% endif %}
+					<div class="review-entry-header">
+						<div>
+							<h3>{{ review.title }}</h3>
+							<p class="review-product-name">{{ review.display_product_name }}</p>
+						</div>
+						<div class="review-rating-wrap">
+							<span class="review-rating-stars" style="--rating-percent: {% widthratio review.rating 5 100 %}%">★★★★★</span>
+							<span class="review-rating">{{ review.rating }}/5</span>
+						</div>
+					</div>
+					<p class="review-body">{{ review.review_text }}</p>
+					<p class="review-meta">By {{ review.reviewer_name }} · {{ review.created_at|date:"M j, Y" }}</p>
+				</article>
+				{% endfor %}
+			</div>
+			{% else %}
+			<div class="review-empty-state">
+				<p class="review-empty-title">No reviews yet</p>
+				<p class="review-empty-copy">Be the first to share a quick impression.</p>
+				<a href="#review-form" class="review-empty-link">Write the first review</a>
+			</div>
+			{% endif %}
+		</section>
+	</section>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+	const successMessage = document.querySelector("[data-review-success-message]");
+	const newReviewCard = document.querySelector("[data-review-new-card]");
+
+	if (successMessage) {
+		successMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+	}
+
+	if (newReviewCard) {
+		window.setTimeout(function () {
+			newReviewCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+		}, successMessage ? 220 : 0);
+	}
+});
+</script>
+{% endblock %}
