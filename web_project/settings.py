@@ -17,8 +17,7 @@ import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-RENDER_DISK_PATH = os.environ.get("RENDER_DISK_PATH")
-DATA_DIR = Path(RENDER_DISK_PATH) if RENDER_DISK_PATH else BASE_DIR
+DATA_DIR = BASE_DIR
 
 
 # Quick-start development settings - unsuitable for production
@@ -44,11 +43,6 @@ CSRF_TRUSTED_ORIGINS = [
     for origin in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",")
     if origin.strip()
 ]
-
-render_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-if render_hostname and render_hostname not in ALLOWED_HOSTS:
-    ALLOWED_HOSTS.append(render_hostname)
-    CSRF_TRUSTED_ORIGINS.append(f"https://{render_hostname}")
 
 
 # Application definition
