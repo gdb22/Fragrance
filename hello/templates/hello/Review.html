@@ -6,32 +6,14 @@ Reviews
 
 {% block content %}
 <section class="content-page review-page review-page--simple">
+	{# Review page header that introduces the submission flow to users. #}
 	<header class="review-simple-header">
 		<p class="page-eyebrow">Reviews</p>
 		<h1 class="page-title">Share your fragrance review</h1>
 		<p class="page-intro">Leave a quick review and browse what others have shared.</p>
 	</header>
 
-	<section class="info-grid">
-		<article class="info-card">
-			<p class="info-card-label">What This Page Does</p>
-			<h2>Collects user feedback</h2>
-			<p>This page allows visitors to submit a fragrance review with a name, product selection, title, rating, and written feedback. Submitted reviews are displayed below for everyone to read.</p>
-		</article>
-
-		<article class="info-card">
-			<p class="info-card-label">How Reviews Work</p>
-			<h2>Simple rating and comment flow</h2>
-			<p>Users choose a fragrance, rate it from 1 to 5 stars, and add a short comment. After submission, the newest review appears in the recent reviews list.</p>
-		</article>
-
-		<article class="info-card">
-			<p class="info-card-label">Why Reviews Matter</p>
-			<h2>Helps other visitors decide</h2>
-			<p>Review content gives future visitors a quick sense of how a fragrance performs, what impression it leaves, and whether it may suit their preferences.</p>
-		</article>
-	</section>
-
+	{# Flash messages confirm successful submissions or display general feedback from the server. #}
 	{% if messages %}
 	<section class="review-flash-stack">
 		{% for message in messages %}
@@ -40,8 +22,10 @@ Reviews
 	</section>
 	{% endif %}
 
+	{# Two-column layout: review form on the left and recent review feed on the right. #}
 	<section class="review-layout">
 		<article class="review-form-card" id="review-form">
+			{# Review form collects the visitor's name, chosen product, title, rating, and written text. #}
 			<div class="review-section-heading">
 				<h2>Leave a review</h2>
 				<p class="review-section-copy">Keep it short, clear, and helpful.</p>
@@ -123,6 +107,7 @@ Reviews
 		</article>
 
 		<section class="review-feed-card">
+			{# Review feed lists the newest reviews first and highlights the newly created one after submission. #}
 			<div class="review-section-heading">
 				<h2>Recent reviews</h2>
 				<p class="review-section-copy">Newest reviews appear first.</p>
@@ -161,6 +146,7 @@ Reviews
 	</section>
 </section>
 
+{# Small script that scrolls the user to the success message and newly added review after submit. #}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 	const successMessage = document.querySelector("[data-review-success-message]");

@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block branding %}
+{# Custom admin branding shown at the top of every admin page. #}
 <div class="brand-shell">
 	<div id="site-name">
 		<a href="{% url 'admin:index' %}">{{ site_header|default:_("Django administration") }}</a>
@@ -19,12 +20,10 @@
 {% endblock %}
 
 {% block nav-global %}
+{# Quick navigation links for the main admin destinations used in this project. #}
 <div class="admin-quick-links">
 	<a href="{% url 'admin:hello_admin_report' %}">Store report</a>
 	<a href="{% url 'admin:hello_product_changelist' %}">Products</a>
 	<a href="{% url 'admin:hello_review_changelist' %}">Reviews</a>
 </div>
-<p style="margin: 12px 0 0; max-width: 720px; color: #d7dce9;">
-	The admin site is used to manage fragrance products, moderate user reviews, and monitor store activity. Use the quick links above to move between the main report and the core data sections.
-</p>
 {% endblock %}

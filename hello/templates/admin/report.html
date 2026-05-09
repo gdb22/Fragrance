@@ -2,16 +2,10 @@
 
 {% block content %}
 <div class="report-page">
+	{# Report landing section summarizing store data for admin users. #}
 	<h1>{{ title }}</h1>
-	<div class="module" style="margin:20px 0;padding:16px;">
-		<p style="margin:0 0 12px;">
-			This admin report gives staff a quick overview of the fragrance store. It summarizes products, reviews, users, and groups so administrators can understand site activity without opening each section separately.
-		</p>
-		<p style="margin:0;">
-			Use the management buttons below to edit records directly. The tables further down show the most recent items, which helps admins review recent changes and spot anything that needs attention.
-		</p>
-	</div>
 
+	{# Action links that route admins to the main management screens. #}
 	<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:20px 0;">
 		<a class="button" href="{{ report_links.products }}">Manage products</a>
 		<a class="button" href="{{ report_links.reviews }}">Manage reviews</a>
@@ -20,9 +14,7 @@
 	</div>
 
 	<h2>Overview</h2>
-	<p style="margin:0 0 16px;max-width:760px;">
-		These summary cards highlight the current size of the catalog, recent review activity, and the number of users with access to the system. They are intended to give admins a quick health check of the project.
-	</p>
+	{# High-level statistics for products, reviews, users, and groups. #}
 	<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px;">
 		<div class="module"><div style="padding:16px;"><strong>Products</strong><p style="margin:8px 0 0;">{{ stats.product_count }} total · {{ stats.active_product_count }} active</p></div></div>
 		<div class="module"><div style="padding:16px;"><strong>Reviews</strong><p style="margin:8px 0 0;">{{ stats.review_count }} total · Avg {{ stats.average_rating|default:"0"|floatformat:1 }}/5</p></div></div>
@@ -31,9 +23,7 @@
 	</div>
 
 	<h2>Security & access</h2>
-	<p style="margin:0 0 16px;max-width:760px;">
-		This section helps administrators review account access levels. It separates active, inactive, staff, and superuser counts so permissions can be monitored at a glance.
-	</p>
+	{# Security snapshot for account status and privilege levels. #}
 	<div class="module" style="margin-bottom:24px;">
 		<table>
 			<tbody>
@@ -48,7 +38,7 @@
 	<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
 		<div class="module">
 			<h2>Recent products</h2>
-			<p style="padding:0 16px 12px;margin:0;">Review the latest catalog entries to confirm pricing, category assignment, and product completeness.</p>
+			{# Latest product records to help admins review recent catalog updates. #}
 			<table>
 				<thead><tr><th>Product</th><th>Category</th><th>Price</th></tr></thead>
 				<tbody>
@@ -63,7 +53,7 @@
 
 		<div class="module">
 			<h2>Recent reviews</h2>
-			<p style="padding:0 16px 12px;margin:0;">Use this table to monitor new customer feedback and identify reviews that may need moderation or follow-up.</p>
+			{# Latest review records to help admins monitor customer feedback. #}
 			<table>
 				<thead><tr><th>Fragrance</th><th>Reviewer</th><th>Rating</th></tr></thead>
 				<tbody>
@@ -78,7 +68,7 @@
 
 		<div class="module">
 			<h2>Recent users</h2>
-			<p style="padding:0 16px 12px;margin:0;">This list helps admins track who recently joined the site and whether user account details look complete.</p>
+			{# Latest user records to help admins track recent signups. #}
 			<table>
 				<thead><tr><th>Username</th><th>Email</th><th>Joined</th></tr></thead>
 				<tbody>
@@ -93,7 +83,7 @@
 
 		<div class="module">
 			<h2>User groups</h2>
-			<p style="padding:0 16px 12px;margin:0;">Group membership gives a quick view of permission organization and shows whether users are assigned to the correct roles.</p>
+			{# Group membership summary used to review permission organization. #}
 			<table>
 				<thead><tr><th>Group</th><th>Members</th></tr></thead>
 				<tbody>
