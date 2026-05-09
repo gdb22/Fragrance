@@ -1,0 +1,45 @@
+{% extends "hello/layout.html" %}
+
+{% block title %}
+About
+{% endblock %}
+
+{% block content %}
+<section class="content-page">
+	<!-- About page introduction -->
+	<section class="page-hero page-hero--simple">
+		<p class="page-eyebrow">About Us</p>
+		<h1 class="page-title">The team behind Fragrance and Beyond</h1>
+		<p class="page-intro">
+			We combine product thinking, technical execution, and communication to build a fragrance experience that feels polished and easy to explore.
+		</p>
+	</section>
+
+	<!-- Team member overview cards -->
+	<section class="team-grid">
+		<article class="profile-card">
+			<p class="profile-role">Project Manager</p>
+			<h2>Christopher Curry</h2>
+			<p>Guides project direction, coordination, and delivery to keep the experience aligned and on track.</p>
+		</article>
+
+		<article class="profile-card">
+			<p class="profile-role">Systems Analyst</p>
+			<h2>Guna Banka</h2>
+			<p>Shapes requirements and structure so the platform remains organized, functional, and user-focused.</p>
+		</article>
+
+		<article class="profile-card">
+			<p class="profile-role">Technical Lead</p>
+			<h2>Matthew Hoffman</h2>
+			<p>Leads implementation decisions and ensures the technical foundation stays clean and maintainable.</p>
+		</article>
+
+		<article class="profile-card">
+			<p class="profile-role">Communications</p>
+			<h2>Maria Iskander</h2>
+			<p>Supports messaging, presentation, and clarity so the brand and experience feel welcoming.</p>
+		</article>
+	</section>
+</section>
+{% endblock %}

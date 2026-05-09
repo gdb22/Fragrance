@@ -1,0 +1,54 @@
+{% extends "hello/layout.html" %}
+
+{% block title %}
+Contact
+{% endblock %}
+
+{% block content %}
+<section class="content-page">
+	<!-- Contact page introduction -->
+	<section class="page-hero page-hero--simple">
+		<p class="page-eyebrow">Contact</p>
+		<h1 class="page-title">Get in touch with our team</h1>
+		<p class="page-intro">
+			Reach out for collaboration, questions, or feedback about the fragrance experience and featured collection.
+		</p>
+	</section>
+
+	<!-- Contact summary and direct team contacts -->
+	<section class="contact-layout">
+		<article class="contact-panel contact-panel--accent">
+			<p class="info-card-label">Let’s connect</p>
+			<h2>We’d love to hear from you</h2>
+			<p>Contact any team member directly below for questions, collaboration, or feedback about the collection.</p>
+		</article>
+
+		<!-- Individual contact cards -->
+		<section class="contact-grid">
+			<article class="contact-card">
+				<p class="profile-role">Project Manager</p>
+				<h2>Christopher Curry</h2>
+				<a href="mailto:cpc@gmail.com" class="contact-link">cpc@gmail.com</a>
+			</article>
+
+			<article class="contact-card">
+				<p class="profile-role">Systems Analyst</p>
+				<h2>Guna Banka</h2>
+				<a href="mailto:gdb22@njit.edu" class="contact-link">gdb22@njit.edu</a>
+			</article>
+
+			<article class="contact-card">
+				<p class="profile-role">Technical Lead</p>
+				<h2>Matthew Hoffman</h2>
+				<a href="mailto:mrh2@njit.edu" class="contact-link">mrh2@njit.edu</a>
+			</article>
+
+			<article class="contact-card">
+				<p class="profile-role">Communications</p>
+				<h2>Maria Iskander</h2>
+				<a href="mailto:mi354@njit.edu" class="contact-link">mi354@njit.edu</a>
+			</article>
+		</section>
+	</section>
+</section>
+{% endblock %}
