@@ -19,9 +19,50 @@ body {
 .site-header {
   position: sticky;
   top: 0;
+  z-index: 50;
+  padding: 14px 16px 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 16px 20px;
+  background: rgba(49, 65, 49, 0.9);
+  border: 1px solid rgba(255, 248, 239, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 14px 30px rgba(49, 65, 49, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.navbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
 .navbar-item {
   font-variant: small-caps;
-  display: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 999px;
+  color: #fff8ef;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.navbar-item:hover {
+  background: rgba(255, 248, 239, 0.12);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 .navbar-item--active {
