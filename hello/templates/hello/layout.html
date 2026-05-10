@@ -18,6 +18,10 @@
 <!-- Main site navigation -->
 <header class="site-header">
     <nav class="navbar">
+        <a href="{% url 'home' %}" class="navbar-brand" aria-label="Fragrance home">
+            <span class="navbar-brand-title">Fragrance</span>
+            <span class="navbar-brand-copy">Discover, compare, and review scents</span>
+        </a>
         <div class="navbar-links">
             <a href="{% url 'home' %}" class="navbar-item{% if current_url == 'home' %} navbar-item--active{% endif %}">Home</a>
             <a href="{% url 'about' %}" class="navbar-item{% if current_url == 'about' %} navbar-item--active{% endif %}">About</a>
@@ -25,6 +29,7 @@
             <a href="{% url 'product' %}" class="navbar-item{% if current_url == 'product' %} navbar-item--active{% endif %}">Products</a>
             <a href="{% url 'review' %}" class="navbar-item{% if current_url == 'review' %} navbar-item--active{% endif %}">Reviews</a>
         </div>
+        <a href="{% url 'review' %}" class="navbar-cta">Write a Review</a>
     </nav>
 </header>
 
@@ -41,6 +46,13 @@
     <div class="site-footer-inner">
         <p class="site-footer-title">Fragrance Collection</p>
         <p class="site-footer-copy">Curated scent picks designed to help you compare notes, style, and signature appeal.</p>
+        <div class="site-footer-links" aria-label="Footer navigation">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'contact' %}">Contact</a>
+            <a href="{% url 'product' %}">Products</a>
+            <a href="{% url 'review' %}">Reviews</a>
+        </div>
         <p class="site-footer-meta">&copy; 2026 Fragrance</p>
     </div>
 </footer>
