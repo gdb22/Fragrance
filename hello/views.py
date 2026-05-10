@@ -1,3 +1,8 @@
+"""Core user-facing views for the Fragrance project.
+
+Project authors: Guna, Christopher, Matthew, Maria.
+"""
+
 from django.contrib import messages
 from django.shortcuts import redirect, render
 
